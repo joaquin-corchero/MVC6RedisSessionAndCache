@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24627.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D8ED4404-BA36-4AA4-946D-C58D7E4AFD91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F77DE867-9D99-484B-B7B6-2A1C1C244C88}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+		readme.txt = readme.txt
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MVC6RedisSessionAndCache.Web", "src\MVC6RedisSessionAndCache.Web\MVC6RedisSessionAndCache.Web.xproj", "{5EDE3634-C001-4ECD-9837-F8682ED0D081}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MVC6RedisSessionAndCache.Web.Tests", "src\MVC6RedisSessionAndCache.Web.Tests\MVC6RedisSessionAndCache.Web.Tests.xproj", "{5496341E-9F89-4359-ACC7-202FA04876F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EDE3634-C001-4ECD-9837-F8682ED0D081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDE3634-C001-4ECD-9837-F8682ED0D081}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDE3634-C001-4ECD-9837-F8682ED0D081}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDE3634-C001-4ECD-9837-F8682ED0D081}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5496341E-9F89-4359-ACC7-202FA04876F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5496341E-9F89-4359-ACC7-202FA04876F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5496341E-9F89-4359-ACC7-202FA04876F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5496341E-9F89-4359-ACC7-202FA04876F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5EDE3634-C001-4ECD-9837-F8682ED0D081} = {D8ED4404-BA36-4AA4-946D-C58D7E4AFD91}
+		{5496341E-9F89-4359-ACC7-202FA04876F8} = {D8ED4404-BA36-4AA4-946D-C58D7E4AFD91}
+	EndGlobalSection
+EndGlobal
