@@ -1,4 +1,4 @@
-# MVC6RedisSessionAndCache
+# MVC6 Redis Session And Cache
 MVC6 Redis Session And Cache
 
 This web app is using dnx451 framework and the rc1 versions of the framework.
