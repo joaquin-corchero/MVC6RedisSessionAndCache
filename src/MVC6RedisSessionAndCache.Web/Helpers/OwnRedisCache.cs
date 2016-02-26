@@ -1,12 +1,7 @@
-﻿using Microsoft.Framework.Caching.Redis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Framework.Internal;
-using Microsoft.Framework.OptionsModel;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Caching.Redis;
+using Microsoft.Extensions.OptionsModel;
 
 namespace MVC6RedisSessionAndCache.Web.Helpers
 {
@@ -18,12 +13,12 @@ namespace MVC6RedisSessionAndCache.Web.Helpers
 
         public void Set(string key, byte[] value, DistributedCacheEntryOptions options)
         {
-            base.Set(key, value, new Microsoft.Framework.Caching.Distributed.DistributedCacheEntryOptions());
+            base.Set(key, value, new DistributedCacheEntryOptions());
         }
 
         public Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options)
         {
-            return base.SetAsync(key, value, new Microsoft.Framework.Caching.Distributed.DistributedCacheEntryOptions());
+            return base.SetAsync(key, value, new DistributedCacheEntryOptions());
         }
     }
 }

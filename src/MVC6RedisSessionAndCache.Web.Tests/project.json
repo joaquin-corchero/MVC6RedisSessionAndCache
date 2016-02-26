@@ -10,11 +10,7 @@
 	},
 	"dependencies": {
 		"MVC6RedisSessionAndCache.Web": "1.0.0-*",
-		"Microsoft.CSharp": "4.0.1-rc2-23513",
 		"System.Collections": "4.0.11-beta-23516",
-		"System.Linq": "4.0.1-rc2-23513",
-		"System.Runtime": "4.0.21-rc2-23513",
-		"System.Threading": "4.0.11-rc2-23513",
 		"xunit": "2.1.0-rc2-build3176",
 		"xunit.runner.dnx": "2.1.0-rc1-build204"
 	},

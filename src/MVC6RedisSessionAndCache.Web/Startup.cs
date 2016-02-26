@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Framework.Caching.Redis;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.AspNet.Session;
+using Microsoft.Extensions.OptionsModel;
 using MVC6RedisSessionAndCache.Web.Helpers;
-
 
 namespace MVC6RedisSessionAndCache.Web
 {
@@ -22,7 +18,7 @@ namespace MVC6RedisSessionAndCache.Web
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -34,18 +30,15 @@ namespace MVC6RedisSessionAndCache.Web
         {
             //This can be injected to any service, controller...
             services.Add(
-                 new ServiceDescriptor(
-                     typeof(Microsoft.Framework.OptionsModel.IOptions<RedisCacheOptions>),
-                     Configuration.Get<RedisCacheOptions>("RedisCacheOptions")
-                 )
-             );
+                new ServiceDescriptor(
+                    typeof (IOptions<RedisCacheOptions>),
+                    Configuration.Get<RedisCacheOptions>("RedisCacheOptions")
+                    )
+                );
 
             //At the moment the redis cache implements the wrong interface, that's why the OwnRedisCache
-            services.AddSingleton<Microsoft.Extensions.Caching.Distributed.IDistributedCache, OwnRedisCache>();
-            services.AddSession(o =>
-            {
-                o.IdleTimeout = TimeSpan.FromMinutes(15);
-            });
+            services.AddSingleton<IDistributedCache, OwnRedisCache>();
+            services.AddSession(o => { o.IdleTimeout = TimeSpan.FromMinutes(15); });
 
             services.AddMvc();
         }
@@ -68,16 +61,11 @@ namespace MVC6RedisSessionAndCache.Web
 
             app.UseIISPlatformHandler();
 
-            app.UseSession();//Before MVC always
+            app.UseSession(); //Before MVC always
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc(routes => { routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}"); });
         }
 
         // Entry point for the application.

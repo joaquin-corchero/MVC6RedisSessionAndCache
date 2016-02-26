@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.Caching.Redis;
-using Microsoft.Framework.Caching.Distributed;
 using System.Text;
+using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Redis;
+using Microsoft.Extensions.OptionsModel;
 
 namespace MVC6RedisSessionAndCache.Web.Controllers
 {
     public class CachingTestController : Controller
     {
         private const string _sessionKey = "SessionKey11";
-        private Microsoft.Framework.OptionsModel.IOptions<RedisCacheOptions> _redisCacheOptions;
+        private readonly IOptions<RedisCacheOptions> _redisCacheOptions;
 
-        public CachingTestController(Microsoft.Framework.OptionsModel.IOptions<RedisCacheOptions> redisCacheOptions)
+        public CachingTestController(IOptions<RedisCacheOptions> redisCacheOptions)
         {
-            this._redisCacheOptions = redisCacheOptions;
+            _redisCacheOptions = redisCacheOptions;
         }
 
         public IActionResult Index()
@@ -32,8 +30,8 @@ namespace MVC6RedisSessionAndCache.Web.Controllers
         {
             var cache = new RedisCache(_redisCacheOptions);
 
-            string key = "CacheKey";
-            byte[] value = Encoding.UTF8.GetBytes($"Hello From Redis Caching {DateTime.Now.ToLongTimeString()}");
+            var key = "CacheKey";
+            var value = Encoding.UTF8.GetBytes($"Hello From Redis Caching {DateTime.Now.ToLongTimeString()}");
             cache.Set(key, value, new DistributedCacheEntryOptions());
 
             var fromCache = Encoding.UTF8.GetString(cache.Get(key));
@@ -52,7 +50,7 @@ namespace MVC6RedisSessionAndCache.Web.Controllers
                 return;
             }
 
-            byte[] sessionValue = Encoding.UTF8.GetBytes($"Hello From Redis Session {DateTime.Now.ToLongTimeString()}");
+            var sessionValue = Encoding.UTF8.GetBytes($"Hello From Redis Session {DateTime.Now.ToLongTimeString()}");
 
             HttpContext.Session.Set(_sessionKey, sessionValue);
 
