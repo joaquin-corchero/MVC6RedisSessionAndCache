@@ -1,0 +1,2 @@
+language: csharp
+solution: MVC6RedisSessionAndCache.Web.sln
